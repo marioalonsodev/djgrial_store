@@ -1,0 +1,315 @@
+/* VARIABLES DE COLOR BASADAS EN TU IMAGEN */
+:root {
+    --bg-base: #0d1319; 
+    --surface-1: rgba(22, 30, 39, 0.6); 
+    --surface-2: #161e27; 
+    --border-color: rgba(255, 255, 255, 0.05);
+    --accent: #00e5ff; 
+    --accent-red: #ff4757;
+    --text-main: #ffffff;
+    --text-muted: #8b9eb0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 229, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 255, 136, 0.05) 0%, transparent 40%);
+    background-attachment: fixed;
+    
+    /* --- FIX DE SCROLL PRINCIPAL PARA QUE NO SE CORTE --- */
+    height: 100vh; /* Altura exacta de la pantalla */
+    overflow: hidden; /* PROHIBIDO hacer scroll en toda la página general */
+}
+
+/* Custom Scrollbars para el Dashboard */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 229, 255, 0.3); }
+
+/* =========================================
+   BLOQUEO PARA CELULARES
+   ========================================= */
+#mobile-block {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--bg-base);
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+}
+#mobile-block h2 { color: var(--accent); margin-bottom: 15px; font-weight: 300;}
+#mobile-block p { color: var(--text-muted); margin-bottom: 10px; line-height: 1.6; }
+
+@media (max-width: 1024px) {
+    #mobile-block { display: flex; }
+    .app-contenedor { display: none !important; }
+}
+
+/* =========================================
+   LAYOUT PRINCIPAL
+   ========================================= */
+.app-contenedor {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    height: 100vh; /* Toma el 100% exacto de la altura */
+}
+
+/* =========================================
+   SIDEBAR (MENÚ LATERAL)
+   ========================================= */
+.sidebar {
+    background-color: var(--surface-2);
+    border-right: 1px solid var(--border-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Altura exacta */
+    overflow-y: auto; /* Scroll interno por si en notebooks el menú es muy largo */
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    padding-left: 10px;
+}
+.logo-img { width: 40px; height: 40px; border-radius: 10px; }
+.logo-text { font-size: 18px; font-weight: 700; color: #fff; }
+.badge-pro { background: var(--accent); color: #000; font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-left: 5px; }
+
+.menu-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    letter-spacing: 1px;
+}
+
+/* ALINEACIÓN PERFECTA DEL ICONO Y EL TEXTO EN EL MENÚ */
+.menu-item {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Espacio entre icono y texto */
+}
+
+.menu-item svg { width: 18px; height: 18px; }
+
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.menu-item.activo {
+    background: linear-gradient(90deg, rgba(0, 229, 255, 0.1) 0%, transparent 100%);
+    color: var(--accent);
+    border-left: 3px solid var(--accent);
+}
+
+.sidebar-footer { margin-top: auto; }
+
+.caja-upgrade {
+    background: linear-gradient(145deg, rgba(0,229,255,0.05), rgba(0,0,0,0.2));
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.caja-upgrade p { font-size: 12px; color: var(--text-muted); margin: 10px 0; line-height: 1.5;}
+.btn-donar {
+    background-color: var(--accent);
+    color: #000;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    transition: 0.2s;
+}
+.btn-donar:hover { box-shadow: 0 5px 15px rgba(0, 229, 255, 0.3); transform: translateY(-2px); }
+
+/* =========================================
+   ÁREA CENTRAL (MAIN)
+   ========================================= */
+.main-content {
+    padding: 30px 40px;
+    height: 100vh; /* Altura exacta */
+    overflow-y: auto; /* ESTA es la única parte que hará scroll hacia abajo */
+    overflow-x: hidden;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.saludo h1 { font-size: 26px; font-weight: 700; margin-bottom: 5px; }
+.saludo p { color: var(--text-muted); font-size: 14px; }
+
+.seccion-dashboard {
+    margin-bottom: 40px;
+}
+
+.header-seccion {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.header-seccion h2 { font-size: 18px; font-weight: 600; }
+.badge-itunes { font-size: 11px; background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 4px; color: #ccc;}
+
+/* =========================================
+   TARJETAS
+   ========================================= */
+.grid-itunes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 15px;
+}
+
+.grid-herramientas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Card Herramientas */
+.card-herramienta {
+    background: var(--surface-1);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 25px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.card-herramienta:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 229, 255, 0.3);
+}
+
+.icono-herramienta {
+    background: rgba(0, 229, 255, 0.1);
+    width: 50px; height: 50px;
+    display: flex; justify-content: center; align-items: center;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+.icono-herramienta svg { width: 24px; height: 24px; color: #ffffff; }
+
+.card-herramienta h3 { font-size: 16px; margin-bottom: 10px; }
+.card-herramienta p { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; flex-grow: 1; font-weight: 300; }
+
+.btn-herramienta {
+    background: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text-main);
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+.card-herramienta:hover .btn-herramienta {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+}
+
+/* Tarjetas de iTunes (Top Tracks) */
+.track-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: background 0.2s;
+}
+.track-card:hover { background: rgba(255,255,255,0.05); }
+.track-img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; }
+.track-info { display: flex; flex-direction: column; gap: 3px; overflow: hidden; }
+.track-title { font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; }
+.track-artist { font-size: 11px; color: var(--text-muted); }
+.track-genre { font-size: 10px; color: var(--accent); font-weight: 600; }
+
+/* =========================================
+   POPUP DE BIENVENIDA (LEADS)
+   ========================================= */
+.popup-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 100000; /* Siempre por encima de todo */
+    transition: opacity 0.4s ease;
+}
+.popup-overlay.oculto { opacity: 0; pointer-events: none; }
+
+.popup-content {
+    position: relative; max-width: 400px; width: 90%;
+    text-align: center; padding: 40px 30px;
+    transform: translateY(0) scale(1); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.popup-overlay.oculto .popup-content { transform: translateY(-50px) scale(0.9); }
+
+.btn-cerrar-popup {
+    position: absolute; top: 15px; right: 15px; background: transparent;
+    border: none; color: var(--text-muted); cursor: pointer; transition: 0.2s;
+}
+.btn-cerrar-popup:hover { color: var(--accent-red); transform: scale(1.1); }
+
+.icono-regalo { color: var(--accent); width: 50px; height: 50px; margin-bottom: 10px; }
+.titulo-popup { font-size: 22px; color: #fff; margin-bottom: 10px; font-weight: 700; }
+.texto-popup { font-size: 13px; color: var(--text-muted); margin-bottom: 25px; line-height: 1.5; }
+.texto-popup strong { color: var(--accent); }
+
+.form-popup { display: flex; flex-direction: column; gap: 12px; }
+
+.grupo-form-popup input, .grupo-form-popup select {
+    width: 100%; padding: 12px 15px; border-radius: 10px; font-family: 'Open Sans', sans-serif;
+    background: var(--surface-2); border: 1px solid var(--border-color); color: #fff; font-size: 14px;
+}
+.grupo-form-popup input:focus, .grupo-form-popup select:focus { border-color: var(--accent); outline: none; }
+.grupo-form-popup select option { background: #161e27; color: #fff; }
+
+.btn-submit-popup {
+    display: flex; justify-content: center; align-items: center; gap: 10px;
+    background: var(--accent); color: #000; width: 100%; padding: 14px;
+    border: none; border-radius: 10px; font-weight: 700; font-size: 15px;
+    cursor: pointer; transition: 0.3s; margin-top: 10px;
+}
+.btn-submit-popup:hover { box-shadow: 0 5px 20px rgba(0, 229, 255, 0.4); transform: translateY(-2px); }
