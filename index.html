@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tienda Afiliados</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- BLOQUEO PARA CELULARES (Podemos quitarlo luego si quieres vender a móviles) -->
+    <div id="mobile-block">
+        <img src="img/icon-512.png" alt="Logo" style="width: 80px; margin-bottom: 20px; border-radius: 20px;">
+        <h2>¡Hola!</h2>
+        <p>Nuestra tienda está optimizada para PC por el momento para brindarte la mejor experiencia visual.</p>
+    </div>
+
+    <!-- DASHBOARD PRINCIPAL -->
+    <div class="app-contenedor">
+        
+        <!-- MENÚ LATERAL (SIDEBAR) -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <img src="img/icon-512.png" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/40/00e5ff/000000?text=S'">
+                <span class="logo-text">Mi Store <span class="badge-pro">VIP</span></span>
+            </div>
+
+            <nav class="menu-navegacion">
+                <p class="menu-label">NAVEGACIÓN</p>
+                <a href="#" class="menu-item activo" id="btn-menu-todos">
+                    <i data-lucide="layout-dashboard"></i> Todos los productos
+                </a>
+                
+                <p class="menu-label">CATEGORÍAS</p>
+                <a href="#" class="menu-item btn-categoria" data-cat="audio">
+                    <i data-lucide="headphones"></i> Audio y Sonido
+                </a>
+                <a href="#" class="menu-item btn-categoria" data-cat="tech">
+                    <i data-lucide="monitor"></i> Tecnología
+                </a>
+                <a href="#" class="menu-item btn-categoria" data-cat="hogar">
+                    <i data-lucide="home"></i> Hogar
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="caja-upgrade">
+                    <i data-lucide="shopping-bag" style="margin-bottom: 10px; color: #00e5ff;"></i>
+                    <p style="margin-top: 0;">Seleccionamos los mejores productos de Mercado Libre para ti.</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ÁREA CENTRAL (VIDRIERA) -->
+        <main class="main-content">
+            
+            <header class="top-header">
+                <div class="saludo">
+                    <h1>Descubre nuestros recomendados</h1>
+                    <p>Encuentra los mejores artículos al mejor precio.</p>
+                </div>
+                <div class="user-profile">
+                    <span>Store V 1.0</span>
+                </div>
+            </header>
+
+            <div id="vista-tienda">
+                <!-- SECCIÓN: PRODUCTOS -->
+                <section class="seccion-dashboard">
+                    <div class="header-seccion">
+                        <h2 id="titulo-seccion">Todos los productos</h2>
+                    </div>
+                    
+                    <!-- ESTE ES EL RECIPIENTE VACÍO. AQUÍ EL JS DIBUJARÁ LAS TARJETAS -->
+                    <div class="grid-herramientas" id="contenedor-productos">
+                        <p class="cargando">Cargando inventario...</p>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- POPUP DE PRODUCTO (OCULTO POR DEFECTO) -->
+    <!-- Reutilizamos tus clases CSS maravillosas del popup anterior -->
+    <div id="popup-producto" class="popup-overlay oculto">
+        <div class="popup-content card-glass">
+            
+            <button id="btn-cerrar-popup-x" class="btn-cerrar-popup"><i data-lucide="x"></i></button>
+            
+            <!-- La imagen, título y precio se inyectarán por JavaScript -->
+            <img id="popup-img" src="" alt="Producto" style="width: 100%; max-height: 250px; object-fit: contain; margin-bottom: 15px; border-radius: 10px; background: white; padding: 10px;">
+            
+            <h2 id="popup-titulo" class="titulo-popup" style="font-size: 18px;">Nombre del producto</h2>
+            <p id="popup-descripcion" class="texto-popup">Descripción detallada...</p>
+            
+            <h3 id="popup-precio" style="color: #00e5ff; font-size: 28px; font-weight: bold; margin-bottom: 20px;">$0</h3>
+            
+            <a id="popup-btn-comprar" href="#" target="_blank" class="btn-submit-popup" style="text-decoration: none;">
+                <i data-lucide="shopping-cart"></i> Ver en Mercado Libre
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Tu Bodega de Productos (¡Siempre va primero!) -->
+    <script src="productos.js"></script>
+
+    <!-- Tu archivo Cerebro -->
+    <script src="app.js"></script>
+    <script>
+        lucide.createIcons({ strokeWidth: 1.5 });
+    </script>
+</body>
+</html>
